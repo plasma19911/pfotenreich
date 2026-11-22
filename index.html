@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#7a5438">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="description" content="Pfotenreich – begleite eine Katzenzivilisation vom ersten Lager bis zur Metropole.">
+<title>Pfotenreich</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <canvas id="world" aria-label="Spielwelt"></canvas>
+
+  <header id="hud">
+    <button id="hudTop" aria-label="Reich anzeigen"><b id="realm">Pfotenreich</b><span id="stage">Ursprung</span></button>
+    <div id="date"></div>
+    <div id="chips"></div>
+  </header>
+
+  <div id="mapBtns">
+    <button id="bZoomIn" aria-label="Hineinzoomen">＋</button>
+    <button id="bZoomOut" aria-label="Herauszoomen">－</button>
+    <button id="bHome" aria-label="Zum Zentrum">⌂</button>
+  </div>
+
+  <div id="toasts" aria-live="polite"></div>
+
+  <button id="evBtn" class="hidden" aria-label="Offenes Ereignis"><b>1</b><span></span></button>
+
+  <nav id="bar">
+    <button id="bVolk"><i>🐾</i>Volk</button>
+    <button id="bChron"><i>📜</i>Chronik</button>
+    <button id="bReich"><i>🏛️</i>Reich</button>
+    <button id="bMenu"><i>⚙️</i>Menü</button>
+  </nav>
+
+  <section id="sheet" class="hidden" role="dialog">
+    <div class="shead"><h2></h2><button class="close" aria-label="Schließen">✕</button></div>
+    <div class="sbody"></div>
+  </section>
+
+  <div id="modal" class="modal hidden" role="dialog"><div class="mbody"></div></div>
+
+  <div id="start" class="hidden">
+    <div class="startbox">
+      <h1>Pfotenreich</h1>
+      <p class="sub">Eine Katzenzivilisation – vom ersten Lager bis zur Metropole.</p>
+      <p>Diese fünf Gründerkatzen haben lange nach einem Zuhause gesucht:</p>
+      <div class="founders"></div>
+      <button id="reroll" class="ghost">Andere Gründerkatzen</button>
+      <label class="nm">Name deines Reiches<input id="realmName" maxlength="28" value="Pfotenreich"></label>
+      <button id="begin" class="primary">Das Reich gründen</button>
+      <p class="muted small">Der Alltag läuft von selbst – du triffst die wichtigen Entscheidungen. Dein Reich lebt über echte Wochen und Monate weiter.</p>
+    </div>
+  </div>
+</div>
+<script src="js/util.js"></script>
+<script src="js/data.js"></script>
+<script src="js/cats.js"></script>
+<script src="js/world.js"></script>
+<script src="js/events.js"></script>
+<script src="js/events_content.js"></script>
+<script src="js/sim.js"></script>
+<script src="js/save.js"></script>
+<script src="js/art.js"></script>
+<script src="js/render.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

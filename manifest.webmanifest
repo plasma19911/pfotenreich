@@ -1,0 +1,17 @@
+{
+  "name": "Pfotenreich",
+  "short_name": "Pfotenreich",
+  "description": "Begleite eine Katzenzivilisation vom ersten Lager bis zur Metropole.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#efe4cd",
+  "theme_color": "#7a5438",
+  "lang": "de",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
