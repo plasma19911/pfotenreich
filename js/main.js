@@ -1,12 +1,19 @@
 // Pfotenreich – Start, Spielschleife, Eingabe, Autosave, Offline-Rückkehr
 (function () {
   const P = self.P, R = P.R, UI = P.UI;
-  P.VERSION = '1.0.0';
+  P.VERSION = '1.2.0';
   const $ = (q) => document.querySelector(q);
   let S = null;
   const cv = $('#world');
   const DEBUG = /[?&]debug=1/.test(location.search);
   let speed = 1;
+  P.setSpeed = function(value) {
+    const v=Number(value);speed=Number.isFinite(v)?P.clamp(v,0,100):1;
+    const field=$('#gameSpeed');if(field)field.value=String(speed);
+    return speed;
+  };
+  P.getSpeed = () => speed;
+  if ($('#gameSpeed')) $('#gameSpeed').onchange = e => P.setSpeed(e.target.value);
 
   P.SETTINGS = Object.assign({ music: false, sfx: true, reduced: false, low: false }, JSON.parse(localStorage.getItem('pfotenreich_settings') || '{}'));
   if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches && localStorage.getItem('pfotenreich_settings') === null) P.SETTINGS.reduced = true;
@@ -21,14 +28,16 @@
     UI.bind(s);
     R.agents.clear(); R.invalidate(); R.follow = null;
     if (!s.world) s.world = P.genWorld(s.seed);
+    if(s.stage>=1) P.assignJobs(s);
     P.assignHomes(s);
     // Kamera auf das Zentrum
-    R.cam.x = P.CX * P.TS + 16; R.cam.y = P.CY * P.TS; R.cam.z = s.stage >= 4 ? 1.1 : 1.8;
+    R.cam.x = P.CX * P.TS + 16; R.cam.y = P.CY * P.TS; R.cam.z = s.stage >= 4 ? 1.6 : 2.8;
     if (fromImport) { s.lastReal = Date.now(); P.save(s); UI.closeSheet(); }
     UI.hud();
   };
 
   async function boot() {
+    if(P.MEDIA) await P.MEDIA.ready;
     P.applySettings();
     window.addEventListener('resize', () => R.resize(cv));
     let raw = null;
@@ -80,18 +89,18 @@
     const dt = Math.min(0.1, (now - last) / 1000);
     last = now;
     if (!S) return;
-    if (P.SETTINGS.low && (frameSkip++ & 1)) return;
-    // Simulation: 1 Sekunde Echtzeit = 1/900 Spielstunde
+    // 60 echte Sekunden = 24 Spielstunden bei 1×; fixed substeps at high speed.
     acc += dt * speed;
-    if (acc >= 1) {
-      const n = Math.floor(acc); acc -= n;
+    if (acc >= 0.1) {
+      const n = Math.floor(acc*10)/10; acc -= n;
       const h = n / P.HOUR_REAL_SEC;
-      if (S.stage >= 1) P.step(S, h, false);
+      if (S.stage >= 1) { let remaining=h; while(remaining>1e-9){const step=Math.min(.25,remaining);P.step(S,step,false);remaining-=step;} }
       S.lastReal = Date.now();
       if (S.stage !== lastStage) { if (lastStage >= 1 && S.stage > lastStage && !UI.modalOpen()) { UI.stageUp(); } lastStage = S.stage; }
       if (S.stats.built !== lastBuilt) { if (lastBuilt) P.AU.play('build'); lastBuilt = S.stats.built; }
     }
-    R.draw(cv, S, dt, now / 1000);
+    if (P.SETTINGS.low && (frameSkip++ & 1)) return;
+    R.draw(cv, S, P.SETTINGS.low ? dt*2 : dt, now / 1000);
     UI.tickAnims(now / 1000);
   }
 
@@ -161,11 +170,11 @@
 
   function setupDebug() {
     const d = document.createElement('div'); d.id = 'debug';
-    d.innerHTML = `<b>Test</b> <button data-s="1">1×</button><button data-s="60">60×</button><button data-s="900">900×</button><button data-s="7200">7200×</button><button data-o="1">+1 Tag offline</button>`;
+    d.innerHTML = `<b>Test</b> <button data-s="1">1×</button><button data-s="60">60×</button><button data-s="100">100×</button><button data-o="1">+1 Tag offline</button>`;
     document.body.appendChild(d);
-    d.querySelectorAll('[data-s]').forEach((b) => b.onclick = () => { speed = +b.dataset.s; });
+    d.querySelectorAll('[data-s]').forEach((b) => b.onclick = () => { P.setSpeed(b.dataset.s); });
     d.querySelector('[data-o]').onclick = () => { S.lastReal -= 6 * 3600 * 1000; onVis(); };
-    P.DBG = { get S() { return S; }, setSpeed: (v) => (speed = v) };
+    P.DBG = { get S() { return S; }, setSpeed: P.setSpeed };
   }
 
   boot();

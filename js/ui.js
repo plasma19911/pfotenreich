@@ -394,7 +394,7 @@
       <textarea id="mPaste" class="hidden" rows="4" placeholder="Exportierten Spielstand hier einfügen"></textarea><button id="mPasteGo" class="ghost hidden">Eingefügten Spielstand laden</button>
       <p class="muted">Das Spiel speichert automatisch (alle 20 Sekunden, beim Schließen und nach jeder Entscheidung).</p>
       <h4>So funktioniert die Zeit</h4>
-      <p class="muted">1 Spielstunde = 15 echte Minuten, 1 Spieltag = 6 echte Stunden, eine Jahreszeit = 10 Spieltage (2,5 echte Tage). Ist das Spiel geschlossen, wird beim nächsten Öffnen nachberechnet, was in der Zwischenzeit geschehen ist – bis zu 15 echte Tage. Danach schlummert dein Reich, bis du zurückkehrst. Wichtige Entscheidungen werden nie ohne dich getroffen.</p>
+      <p class="muted">Bei 1× entspricht eine echte Minute einem Spieltag. Eine Jahreszeit dauert 10 Spieltage (10 echte Minuten), ein Jahr 40 Spieltage. Oben wählst du Pause oder 1× bis 100×; bei 100× dauert ein Spieltag 0,6 Sekunden. Der Zeitraffer gilt nur im geöffneten Spiel. Nach Abwesenheit werden höchstens 60 Spieltage (eine echte Stunde bei 1×) nachberechnet. Wichtige Entscheidungen bleiben dir überlassen.</p>
       <h4>Anleitung</h4>
       <p class="muted">Ziehen verschiebt die Kamera, zwei Finger oder das Mausrad zoomen. Tippe auf Katzen und Gebäude. Wenn unten ein leuchtender Knopf erscheint, wartet ein Ereignis auf deine Entscheidung. Unter „Reich“ setzt du Prioritäten und Bauvorhaben, unter „Volk“ lernst du jede Katze kennen, die „Chronik“ erzählt eure Geschichte.</p>
       <p class="muted">Pfotenreich · Version ${P.VERSION} · ohne Werbung, ohne Käufe.</p>

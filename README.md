@@ -31,8 +31,8 @@ Mit `file://` startet das Spiel zwar auch, Service Worker und Installation funkt
 
 ## Zeit
 
-1 Spielstunde = 15 echte Minuten, 1 Spieltag = 6 echte Stunden, eine Jahreszeit = 10 Spieltage, ein Jahr = 40 Spieltage (10 echte Tage).
-Geschlossen rechnet der Browser nicht weiter. Beim nächsten Öffnen wird die vergangene Zeit in groben Schritten nachberechnet, höchstens 60 Spieltage (15 echte Tage). Danach „schlummert“ das Reich.
+Bei 1×: eine echte Minute = ein Spieltag. Eine Jahreszeit dauert 10 Minuten, ein Jahr 40 Minuten. Zeitraffer: Pause, 1×, 5×, 10×, 25×, 50×, 100×. Bei 100× dauert ein Spieltag 0,6 Sekunden.
+Geschlossen rechnet der Browser nicht weiter. Beim nächsten Öffnen wird die vergangene Zeit in groben Schritten nachberechnet, höchstens 60 Spieltage (eine echte Stunde bei 1×). Danach „schlummert“ das Reich.
 Während der Abwesenheit sind die Härten begrenzt: Niemand verhungert, Stimmung und Zusammenhalt haben Untergrenzen, und Gebäude verfallen nicht. Es entstehen höchstens 3 offene Entscheidungen. Krisen-Ereignisse werden in dieser Zeit nicht ausgelöst, und keine Entscheidung wird automatisch getroffen.
 
 ## Aufbau des Quellcodes

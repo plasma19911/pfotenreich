@@ -154,3 +154,12 @@ textarea { width: 100%; font: 13px monospace; border-radius: 12px; border: 1px s
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
+/* Fantasy materials: readable controls and photographic art. */
+#timeControl { display:flex;align-items:center;gap:5px;background:rgba(30,33,30,.94);color:#eddfbc;border:1px solid #a18b58;border-radius:9px;padding:3px 7px;font-size:12px;pointer-events:auto; }
+#gameSpeed { background:#252c29;color:#f2dfaa;border:0;font:600 13px system-ui;padding:5px 2px;min-height:32px; }
+#start { background:linear-gradient(90deg,rgba(8,15,15,.72),rgba(8,15,15,.28)),url('assets/scenes.webp') 0 0 / auto 200%; }
+.startbox { background:linear-gradient(145deg,rgba(30,36,33,.97),rgba(15,22,22,.97));color:#e8ddc7;border:1px solid #958253;box-shadow:0 20px 70px #0008; }
+.startbox h1 { color:#e6c886;text-shadow:0 2px 12px #000; }
+.startbox .muted,.startbox .sub { color:#b8b7a7; }
+.pc { box-shadow:0 0 0 1px #ad9457,0 2px 8px #0004; }
+@media(max-width:480px) { #hud { gap:4px; } #timeControl { margin-left:auto; } #hudTop b { font-size:14px; } #gameSpeed { max-width:65px; } }

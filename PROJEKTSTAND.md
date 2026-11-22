@@ -1,4 +1,8 @@
-# Projektstand Pfotenreich – Version 1.0.0
+# Aktueller Projektstand – Version 1.2.0
+
+Siehe `GRAFIKUPDATE.md` für das aktuelle Grafik-, Zeit- und Baustartupdate.
+
+# Ursprünglicher Projektstand – Version 1.0.0
 
 ## Umgesetzt und getestet
 

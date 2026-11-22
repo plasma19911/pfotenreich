@@ -52,6 +52,8 @@
   P.hourly = function (s, h, offline) {
     if (s.stage < 1) return;
     const al = P.alive(s);
+    // Repair older settlements founded before the initial job assignment fix.
+    if (P.workers(s).some(c => !c.job)) P.assignJobs(s);
     const out = { food: 0, wood: 0, sisal: 0, cardboard: 0, wool: 0, catnip: 0, know: 0, shells: 0, work: 0, exp: 0, coh: 0 };
     const fishBonus = 1 + 0.1 * (s.flags.lift || 0) + (s.flags.reserve ? 0.1 : 0) - (s.flags.fishRest ? 0.08 : 0) + (s.flags.edu === 'fish' ? 0.08 : 0);
     const jettySlots = s.b.reduce((a, b) => a + (b.prog >= 1 && P.BUILD[b.type].fish ? P.BUILD[b.type].slots * b.lv : 0), 0);
@@ -443,7 +445,7 @@
   };
 
   // Nachberechnung nach Abwesenheit: grobe Schritte, Negatives begrenzt, keine automatischen Entscheidungen
-  P.MAX_OFFLINE_H = 24 * 60; // max. 60 Spieltage (= 15 echte Tage) werden simuliert
+  P.MAX_OFFLINE_H = 24 * 60; // max. 60 Spieltage (= eine echte Stunde bei 1×) werden simuliert
   P.catchUp = function (s, nowMs, onProgress) {
     const elapsed = Math.max(0, (nowMs - s.lastReal) / 1000);
     let hours = elapsed / P.HOUR_REAL_SEC;

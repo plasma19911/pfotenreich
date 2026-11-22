@@ -1,19 +1,21 @@
-# Grafikupdate 1.1
+# Pfotenreich 1.2 – Fantasygrafik und Zeitsteuerung
 
-Die vorhandene 2D-Canvas-Darstellung wurde überarbeitet. Das Spiel bleibt stilisiert; dieses Update ist keine fotorealistische 3D-Umsetzung.
+Im Spiel werden lokal gespeicherte, generierte Rastergrafiken verwendet:
 
-- Ruhigere Naturfarben und feine Boden-, Gras- und Sandstrukturen.
-- Zusammenhängendes Flusswasser mit Ufertiefe, feinen Reflexen und abgerundeten Uferübergängen.
-- Detailliertere Baumkronen und Rindenakzente.
-- Licht und Schatten im Fell sowie individuelle feine Fellstriche in Porträts und Weltfiguren.
-- Etwas kleinere Augen in Porträts.
-- Langsamerer Laufzyklus, gebogene Beinbewegung, sanftere Kopfbewegung und Atmung im Stand.
-- Strukturierte Holzflächen und plastischere Sisalstützen an den Kratzbaumgebäuden.
-- Feine Bodenstrukturen in allen Ereignisszenen und dezent plastische Bedienflächen.
-- Gepolsterte Geländecaches gegen sichtbare Nahtlinien; neue Offline-Cache-Version.
+- 16 realistische Anime-Fantasy-Porträts mit Hüten, Brillen, Fellbärten, Mänteln, Schmuck und Rüstungen.
+- Vier animierte Weltfiguren mit je vier Laufphasen: dicker Schmied, dünner Späher, kleiner Magier und großer Gelehrter. Körperbreite, Größe und Lebensphase unterscheiden die Bewohner zusätzlich.
+- Neun Gebäudevorlagen sowie neun Natur- und Einrichtungsobjekte.
+- Vier Landschaftsbilder für Ereignisse und Startbildschirm.
+- Generierte Gras-, Erd-, Stein- und Wassertexturen für die tatsächlich bespielbare Karte.
 
-## Verwendung
-Den vollständigen Ordner auf dem bisherigen Webserver ersetzen, danach die Seite neu laden. Die bestehenden Speicherformate und Speicherschlüssel bleiben erhalten. Für einen lokalen Start `python -m http.server 8000` im Spielordner ausführen und `http://localhost:8000` öffnen.
+Die Bilder sind WebP-Dateien unter `assets/`. Transparenz der Katzen und Gebäude bleibt erhalten. Keine kostenpflichtige Laufzeit-API, alle Grafiken werden offline zwischengespeichert. Falls ein Bild nicht geladen werden kann, bleibt die prozedurale Darstellung als Rückfall erhalten. Die Welt bleibt ein zweidimensionales Spiel mit gerenderten Bildfiguren.
+
+## Zeit und Baustart
+
+Bei 1× entspricht eine echte Minute einem Spieltag. Pause, 1×, 5×, 10×, 25×, 50× und 100× stehen oben im HUD zur Verfügung. Bei 100× dauert ein Spieltag 0,6 Sekunden. Die Simulation verarbeitet auch bei hohem Tempo kleine Zeitschritte. Der Akkusparmodus beeinflusst das Simulationstempo nicht mehr. Offline gilt 1×, begrenzt auf 60 Spieltage.
+
+Der Fehler beim Baustart ist behoben: Die Gründung teilt sofort Berufe zu. Bestehende Reiche ohne Arbeitszuteilung werden beim Laden bzw. nächsten Simulationsschritt repariert. Es wird kein neues Reich dafür benötigt.
 
 ## Prüfung
-JavaScript-Syntax, Canvas-Rendering der Welt, Porträts, 24 Ereignis-/Jahreszeitenkombinationen und aller Gebäudetypen sowie der vorhandene 30-Tage-Simulationstest wurden geprüft. Speichern/Laden und deterministisches Offline-Nachholen liefen erfolgreich. Ein interaktiver Browsertest und eine Leistungsmessung auf einem echten Handy waren in dieser Umgebung nicht möglich.
+
+`node test/construction_test.js` prüft alle drei Gründungsentscheidungen, sofortige Bautätigkeit, Reparatur alter Arbeitszuteilungen, eine Minute pro Tag und die 100×-Umrechnung. Der bestehende Simulationstest läuft ebenfalls. Zusätzlich wurden die eingebundenen Bilddateien, alle Gebäudetypen und Jahreszeiten über Canvas gerendert und Weltansichten visuell geprüft. Ein Test auf einem echten Handy steht noch aus.

@@ -23,6 +23,8 @@
     s.foundDay = P.day(s);
     P.placeBuilding(s, 'den', { free: true, at: [P.CX - 1, P.CY + 1] });
     P.placeBuilding(s, 'feedspot', { free: true, at: [P.CX + 1, P.CY - 1] });
+    P.assignJobs(s);
+    P.assignHomes(s);
     const names = P.alive(s).map((c) => c.name).join(', ');
     P.chron(s, 'found', `Gründung von ${s.realm}: ${names} lassen sich ${where === 'bach' ? 'am Bach' : where === 'sonne' ? 'auf der sonnigen Anhöhe' : 'unter der alten Weide'} nieder.`);
     for (const c of P.alive(s)) P.addMem(s, c, `Hat ${s.realm} gegründet.`, 3);

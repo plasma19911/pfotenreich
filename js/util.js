@@ -73,8 +73,8 @@
   };
   P.shade = (h, t) => (t >= 0 ? P.mix(h, '#ffffff', t) : P.mix(h, '#000000', -t));
 
-  // Zeit: 1 Spielstunde = 15 echte Minuten → 1 Spieltag = 6 echte Stunden
-  P.HOUR_REAL_SEC = 900;
+  // Zeit: 1 echte Minute = 1 Spieltag (24 Stunden).
+  P.HOUR_REAL_SEC = 60 / 24;
   P.DAYS_PER_SEASON = 10;
   P.DAYS_PER_YEAR = 40;
   P.SEASONS = ['Frühling', 'Sommer', 'Herbst', 'Winter'];
